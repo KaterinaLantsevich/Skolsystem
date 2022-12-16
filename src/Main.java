@@ -4,12 +4,12 @@ public class Main {
     public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
         StudentFactory studentFactory = new StudentFactory();
-        //Student student1 = studentFactory.getStudent();
+        Student student1 = studentFactory.getStudent("School");
 
         System.out.println("Choose category: DISTANCE/SCHOOL");
         String category = scan.nextLine();
-        if(category.equalsIgnoreCase("SCHOOL"));
-       // student1.studentRegistration();
+        if(category.equalsIgnoreCase("SCHOOL"))
+        student1.studentRegistration();
 
     }
 }
