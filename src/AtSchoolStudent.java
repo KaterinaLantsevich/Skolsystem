@@ -16,5 +16,7 @@ public class AtSchoolStudent implements Student{
         String lastName = scan.nextLine();
         System.out.println("Enter your ID: ");
         String idNumber = scan.nextLine();
+        System.out.println("Choose lecture time: MORNING/AFTERNOON");
+        String time = scan.nextLine();
     }
 }
