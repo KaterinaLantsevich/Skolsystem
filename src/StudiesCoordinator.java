@@ -1,2 +1,2 @@
-public class StudiesCoordinator {
+public class StudiesCoordinator implements SchoolStuff{
 }

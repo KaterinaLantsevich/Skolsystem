@@ -1,2 +1,2 @@
-public class Teacher extends Person {
+public class Teacher implements SchoolStuff{
 }

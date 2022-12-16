@@ -1,2 +1,2 @@
-public class DistanceStudent extends Person{
+public class DistanceStudent {
 }

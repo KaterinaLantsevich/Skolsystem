@@ -1,2 +1,2 @@
-public class Student extends Person{
+public interface Student {
 }
