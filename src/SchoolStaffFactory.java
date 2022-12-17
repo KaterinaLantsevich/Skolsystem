@@ -1,7 +1,7 @@
-public class SchoolStuffFactory {
+public class SchoolStaffFactory {
 
 
-    public SchoolStuff getSchoolStuff(String schoolStuffType) {
+    public SchoolStaff getSchoolStuff(String schoolStuffType) {
         if (schoolStuffType == null) {
             return null;
         }
