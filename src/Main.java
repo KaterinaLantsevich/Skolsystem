@@ -3,15 +3,17 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
+
         StudentFactory studentFactory = new StudentFactory();
-        Student student1 = studentFactory.getStudent("SCHOOL");
-        Student student2 = studentFactory.getStudent("DISTANCE");
+        Student schoolStudent = studentFactory.getStudent("SCHOOL");
+        Student distanceStudent = studentFactory.getStudent("DISTANCE");
+
         System.out.println("Choose category: DISTANCE/SCHOOL");
         String category = scan.nextLine();
         if(category.equalsIgnoreCase("SCHOOL")) {
-            student1.studentRegistration();
+            schoolStudent.studentRegistration();
         }else if(category.equalsIgnoreCase("DISTANCE")) {
-            student2.studentRegistration();
+            distanceStudent.studentRegistration();
         }
 
 
