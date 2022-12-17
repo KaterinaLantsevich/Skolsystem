@@ -4,17 +4,23 @@ import java.util.Map;
 
 public class Course {
 
-    File file = new File("Courses.txt");
-    Map<Integer,String> courseMap = new HashMap<>();
+    //File file = new File("Courses.txt");
+    //Map<Integer,String> courseMap = new HashMap<>();
+    String courseCode;
+    String courseName;
 
-    public static void createCourse(){
-        //skapar  course
-        //läser in till map
-        //läser från lista till fil
 
+    Course(String name, String code){
+        this.courseName = name;
+        this.courseCode = code;
     }
 
-    public static void getCourseCatalog(){
-        //läser från fil
+    @Override
+    public String toString()
+    {
+        return "Course{" +
+                "courseCode='" + courseCode + '\'' +
+                ", courseName='" + courseName + '\'' +
+                '}';
     }
 }

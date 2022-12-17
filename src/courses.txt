@@ -1,0 +1,2 @@
+Svenska1, SV1
+Engelska1, ENG1

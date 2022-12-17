@@ -1,23 +1,38 @@
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args){
+        Path p1 = Paths.get("src/courses.txt");
+        Path p2 = Paths.get("src/students.txt");
+        School school = new School("GroupThreeAcademy", "GroupThreeStreet", p1, p2);
+        schoolSystem schoolSystem = new schoolSystem(school);
+        int option;
+        String menuMessage = """
+                WELCOME!\s
+                1. REGISTER AS STUDENT
+                2. GO TO COURSE CATALOGUE
+                3. APPLY FOR COURSE
+                4. EXIT PROGRAM""";
         Scanner scan = new Scanner(System.in);
+        do
+        {
+            System.out.println(menuMessage);
+            option = scan.nextInt();
+            if(option == 1){
+                schoolSystem.registerStudent();
+            }
+            else if(option == 2){
+                schoolSystem.showCourseCatalogue();
+            }
+            else if(option == 3){
+                // TODO kolla ifall studenten är behörig till kursen och lägg isåfall till kursen
+                System.out.println("OKEJDÅ");
+            }
+        } while (option != 4);
 
-        StudentFactory studentFactory = new StudentFactory();
-        Student schoolStudent = studentFactory.getStudent("SCHOOL");
-        Student distanceStudent = studentFactory.getStudent("DISTANCE");
-
-        System.out.println("Choose category: DISTANCE/SCHOOL");
-        String category = scan.nextLine();
-        if(category.equalsIgnoreCase("SCHOOL")) {
-            schoolStudent.studentRegistration();
-        }else if(category.equalsIgnoreCase("DISTANCE")) {
-            distanceStudent.studentRegistration();
-        }
-
-
-
+        /*
         SchoolStuffFactory schoolStuffFactory = new SchoolStuffFactory();
         SchoolStuff schoolStuff1 = schoolStuffFactory.getSchoolStuff("Teacher");
         schoolStuff1.printOut();
@@ -25,6 +40,8 @@ public class Main {
         schoolStuff2.printOut();
         SchoolStuff schoolStuff3 = schoolStuffFactory.getSchoolStuff("Coordinator");
         schoolStuff3.printOut();
+
+         */
 
     }
 }

@@ -3,13 +3,37 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class DistanceStudent implements Student {
+
+    String nameOfStudent;
+    long idNumber;
+    School school;
+
+
+    @Override
+    public void setSchoolForStudent(School school)
+    {
+        this.school = school;
+    }
+
+    @Override
+    public void setName(String name)
+    {
+        this.nameOfStudent = name;
+    }
+
+    @Override
+    public void setId(long id)
+    {
+        this.idNumber = id;
+    }
+
     @Override
     public void studentRegistration() {
-        String nameOfStudent;
-        int idNumber;
+        school.addStudent(this);
+        /*
         Map<Integer,String> studentMap = new HashMap<>();
         Scanner scan = new Scanner(System.in);
-        System.out.println("Enter your first and last name: "); //TODO her v main
+        System.out.println("Enter your first and last name: ");
         while (scan.hasNextLine()) {
             nameOfStudent = scan.nextLine();
             System.out.println("Enter your ID: ");
@@ -24,5 +48,7 @@ public class DistanceStudent implements Student {
                 studentRegistration();
             }
         }
+
+         */
     }
 }
