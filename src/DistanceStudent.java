@@ -1,14 +1,22 @@
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class DistanceStudent implements Student {
+public class DistanceStudent implements Student, Serializable
+{
 
     String nameOfStudent;
     long idNumber;
     School school;
+    ArrayList<Course> currentCourses;
+    ArrayList<Course> coursesTaken;
 
-
+    DistanceStudent(){
+        this.currentCourses = new ArrayList<>();
+        this.coursesTaken = new ArrayList<>();
+    }
     @Override
     public void setSchoolForStudent(School school)
     {
@@ -50,5 +58,25 @@ public class DistanceStudent implements Student {
         }
 
          */
+    }
+
+    @Override
+    public void addCourse(Course course)
+    {
+        this.currentCourses.add(course);
+    }
+
+    @Override
+    public void finishCourse(Course course)
+    {
+        for(Course c : this.currentCourses){
+            if(c == course){
+                this.currentCourses.remove(c);
+                this.coursesTaken.add(course);
+                return;
+            }
+        }
+        System.out.println("Something went wrong in finishCourse");
+
     }
 }

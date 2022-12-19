@@ -7,14 +7,10 @@ public class schoolSystem
     schoolSystem(School s){
         this.school = s;
     }
-    public void registerStudent()
+    public Student registerStudent()
     {
         Scanner scan = new Scanner(System.in);
         StudentFactory studentFactory = new StudentFactory();
-        /*
-        Student schoolStudent = studentFactory.getStudent("SCHOOL");
-        Student distanceStudent = studentFactory.getStudent("DISTANCE");
-         */
         System.out.println("Enter your name: ");
         String name = scan.nextLine();
         System.out.println("Enter your id: ");
@@ -27,6 +23,7 @@ public class schoolSystem
         student.setId(id);
         student.setSchoolForStudent(this.school);
         student.studentRegistration();
+        return student;
 
     }
 
@@ -37,4 +34,32 @@ public class schoolSystem
         }
     }
 
+    public void applyForCourse(Course course, Student student){
+        student.addCourse(course);
+        System.out.println("Course was added!");
+    }
+
+    public void enterCourseToApply(Student student)
+    {
+        String courseInfo;
+        Scanner scan = new Scanner(System.in);
+
+        while (true){
+            System.out.println("What course do you want to apply to? (ENTER EXIT TO GO BACK TO MENU)");
+            courseInfo = scan.nextLine();
+            if(courseInfo.equalsIgnoreCase("EXIT")){
+                return;
+            }
+            for (Course c : this.school.courses){
+                if(c.getCourseCode().equalsIgnoreCase(courseInfo.strip()) || c.getCourseName().equalsIgnoreCase(courseInfo.strip())){
+                    System.out.println("The course was found!");
+                    applyForCourse(c, student);
+                    return;
+                }
+            }
+            System.out.println("The course you entered is not in the course catalogue!");
+        }
+
+
+    }
 }

@@ -3,4 +3,6 @@ public interface Student {
     void setName(String name);
     void setId(long id);
     void studentRegistration();
+    void addCourse(Course course);
+    void finishCourse(Course course);
 }
