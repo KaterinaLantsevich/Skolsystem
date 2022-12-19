@@ -1,7 +1,6 @@
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.io.*;
+import java.nio.file.Path;
+import java.util.*;
 
 public class schoolSystem
 {
@@ -31,13 +30,13 @@ public class schoolSystem
 
     public void showCourseCatalogue(){
         Set<Course> courses = this.school.courses;
+        System.out.println("These are the courses " + this.school.schoolName + " offers: ");
         for (Course c : courses){
-            System.out.println(c);
+            System.out.println(" - " + c.courseName + " (" + c.courseCode + ")");
         }
     }
 
-    public void applyForCourse(Course course, Student student){
-        // TODO Kolla ifall studenten har läst alla kurser som krävs för att söka till denna kurs
+    public void applyForCourse(Course course, Student student, Path p){
         Set<Course> courses = student.getCurrentCourses();
         Set<String> courseIds = new HashSet<>();
         Set<Course> reqCourses = this.school.requiredPrerequisites;
@@ -51,6 +50,7 @@ public class schoolSystem
             // kolla om kursen de har sökt är en av de kurser som kan läsas av vem som helst
             if(course.courseCode.equalsIgnoreCase(reqCourse.courseCode)){
                 student.addCourse(course);
+                updateStudent(student, p);
                 System.out.println("Course was added!");
                 return;
             }
@@ -60,6 +60,7 @@ public class schoolSystem
         }
         if(coursesToComplete.isEmpty()){
             student.addCourse(course);
+            updateStudent(student, p);
             System.out.println("Course was added!");
         }
         else {
@@ -70,7 +71,7 @@ public class schoolSystem
         }
     }
 
-    public void enterCourseToApply(Student student)
+    public void enterCourseToApply(Student student, Path p)
     {
         String courseInfo;
         Scanner scan = new Scanner(System.in);
@@ -83,7 +84,7 @@ public class schoolSystem
             for (Course c : this.school.courses){
                 if(c.getCourseCode().equalsIgnoreCase(courseInfo.strip()) || c.getCourseName().equalsIgnoreCase(courseInfo.strip())){
                     System.out.println("The course was found!");
-                    applyForCourse(c, student);
+                    applyForCourse(c, student, p);
                     return;
                 }
             }
@@ -91,5 +92,110 @@ public class schoolSystem
         }
 
 
+    }
+
+    public Student welcomeMenu(Path studentsFilePath)
+    {
+        ArrayList<Student> studentsList = new ArrayList<>();
+        Student student = null;
+        String name = "";
+        long id;
+        int option = 0;
+        String menuMessage = """
+                WELCOME!\s
+                1. LOG IN AS STUDENT
+                2. SIGN UP AS STUDENT
+                3. EXIT PROGRAM""";
+        Scanner scan = new Scanner(System.in);
+        do
+        {
+            System.out.println(menuMessage);
+            option = scan.nextInt();
+            try
+            {
+                switch (option){
+                    case 1:
+                        while(true){
+                            studentsList = read(studentsFilePath);
+                            scan.nextLine();
+                            System.out.println("Enter your name: (ENTER EXIT TO GO BACK TO MENU)");
+                            name = scan.nextLine();
+                            System.out.println(name);
+                            if(name.equalsIgnoreCase("EXIT")){
+                                break;
+                            }
+                            System.out.println("Enter your id: ");
+                            id = scan.nextLong();
+                            System.out.println(id);
+                            for(Student s : studentsList){
+                                if(s.getName().equalsIgnoreCase(name) && s.getID() == id){
+                                    System.out.println("LOG IN SUCCESSFUL");
+                                    return s;
+                                }
+                            }
+                            System.out.println("The name or id you entered is not registered as a student.");
+                        }
+                        break;
+                    case 2:
+                        if(student != null){
+                            System.out.println("You have already logged in!");
+                        }
+                        else{
+                            student = registerStudent();
+                            studentsList = read(studentsFilePath);
+                            studentsList.add(student);
+                            write(studentsFilePath, studentsList);
+                            System.out.println(school);
+                        }
+                        break;
+                    case 3:
+                        break;
+                    default:
+                        System.out.println("Please choose one of the options!");
+                }
+            }
+            catch (NumberFormatException | InputMismatchException e){
+                System.out.println("Please choose one of the options! ");
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        } while (option != 3);
+        return student;
+    }
+
+    public static ArrayList<Student> read(Path p){
+        ArrayList<Student> studentsList = new ArrayList<>();
+        try(ObjectInputStream ois = new ObjectInputStream(
+                new FileInputStream(String.valueOf(p))
+        )){
+            studentsList = (ArrayList<Student>) ois.readObject();
+        }
+        catch (EOFException e) {
+            // End of file reached, exit the loop
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return studentsList;
+    }
+
+    public static void write(Path path, ArrayList<Student> studentList)
+    {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(String.valueOf(path)))) {
+            oos.writeObject(studentList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateStudent(Student student, Path p){
+        int index = 0;
+        ArrayList<Student> studentArrayList = read(p);
+        for (Student s: studentArrayList){
+            if(s.getName().equalsIgnoreCase(student.getName()) && s.getID() == student.getID()){
+                studentArrayList.set(index, student);
+                write(p, studentArrayList);
+            }
+            index ++;
+        }
     }
 }

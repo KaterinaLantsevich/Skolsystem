@@ -27,6 +27,18 @@ public class DistanceStudent implements Student, Serializable
     }
 
     @Override
+    public String getName()
+    {
+        return this.nameOfStudent;
+    }
+
+    @Override
+    public long getID()
+    {
+        return this.idNumber;
+    }
+
+    @Override
     public void setId(long id)
     {
         this.idNumber = id;
