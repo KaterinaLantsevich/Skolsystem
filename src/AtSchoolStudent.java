@@ -1,17 +1,19 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class AtSchoolStudent implements Student, Serializable
 {
     String nameOfStudent;
     long idNumber;
     School school;
-    ArrayList<Course> currentCourses;
+    Set<Course> currentCourses;
     ArrayList<Course> coursesTaken;
 
 
     AtSchoolStudent(){
-        this.currentCourses = new ArrayList<>();
+        this.currentCourses = new HashSet<>();
         this.coursesTaken = new ArrayList<>();
     }
     @Override
@@ -35,26 +37,6 @@ public class AtSchoolStudent implements Student, Serializable
     @Override
     public void studentRegistration() {
         school.addStudent(this);
-        //Map<Integer,String> studentMap = new HashMap<>();
-        /*
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Enter your first and last name: ");
-        while (scan.hasNextLine()) {
-            nameOfStudent = scan.nextLine();
-            System.out.println("Enter your ID: ");
-            if (scan.hasNextInt()) {
-                idNumber = scan.nextInt();
-                //studentMap.put(idNumber,nameOfStudent);
-                System.out.println("You have been successfully registered");
-                break;
-            } else {
-                System.out.println("You made mistake");
-                scan.next();
-                studentRegistration();
-            }
-        }
-
-         */
     }
 
     @Override
@@ -75,6 +57,11 @@ public class AtSchoolStudent implements Student, Serializable
         }
         System.out.println("Something went wrong in finishCourse");
 
+    }
+    @Override
+    public Set<Course> getCurrentCourses()
+    {
+        return this.currentCourses;
     }
 
 }

@@ -2,19 +2,22 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class School implements Serializable
 {
     String schoolName;
     String adress;
-    ArrayList<Course> courses;
+    //ArrayList<Course> courses;
+    Set<Course> courses;
     ArrayList<Student> students;
-    ArrayList<Course> requiredPrerequisites;
-    School(String name, String adress, Path p1, Path p2, ArrayList<Course> preReq){
+    Set<Course> requiredPrerequisites;
+    School(String name, String adress, Path p1, Path p2, Set<Course> preReq){
         this.schoolName = name;
         this.adress = adress;
         this.requiredPrerequisites = preReq;
-        this.courses = new ArrayList<>();
+        this.courses = new HashSet<>();
         this.students = new ArrayList<>();
         readCourses(p1);
         readStudents(p2);
@@ -44,8 +47,8 @@ public class School implements Serializable
             while ((tempLine = br.readLine()) != null)
             {
                 courseInfo = tempLine.split(",");
-                courseName = courseInfo[0];
-                courseCode = courseInfo[1];
+                courseName = courseInfo[0].strip().toUpperCase();
+                courseCode = courseInfo[1].strip().toUpperCase();
                 course = new Course(courseName, courseCode);
                 course.setRequiredPrerequisites(this.requiredPrerequisites);
                 addCourse(course);

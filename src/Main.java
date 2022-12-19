@@ -2,19 +2,16 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws Exception{
         ArrayList<Student> studentsList = new ArrayList<>();
         Student student = null;
-        String courseInfo;
         Path p1 = Paths.get("src/courses.txt");
         Path p2 = Paths.get("src/students.txt");
-        ArrayList<Course> requiredPrerequisites = new ArrayList<>();
-        requiredPrerequisites.add(new Course("Svenska 1", "SV1"));
+        Set<Course> requiredPrerequisites = new HashSet<>();
+        requiredPrerequisites.add(new Course("Svenska 1", "SVE1"));
         requiredPrerequisites.add(new Course("Engelska 1", "ENG1"));
         requiredPrerequisites.add(new Course("Matematik 1", "MAT1"));
         School school = new School("GroupThreeAcademy", "GroupThreeStreet", p1, p2 , requiredPrerequisites);
@@ -25,7 +22,8 @@ public class Main {
                 1. REGISTER AS STUDENT
                 2. GO TO COURSE CATALOGUE
                 3. APPLY FOR COURSE
-                4. EXIT PROGRAM""";
+                4. ABOUT THE SCHOOL
+                5. EXIT PROGRAM""";
         Scanner scan = new Scanner(System.in);
         System.out.println(school);
         do
@@ -59,6 +57,7 @@ public class Main {
                         }
                         break;
                     case 4:
+                        System.out.println(school);
                         break;
                     default:
                         System.out.println("Please choose one of the options!");
@@ -69,7 +68,7 @@ public class Main {
             } catch (Exception e){
                 e.printStackTrace();
             }
-        } while (option != 4);
+        } while (option != 5);
         /*
         SchoolStuffFactory schoolStuffFactory = new SchoolStuffFactory();
         SchoolStuff schoolStuff1 = schoolStuffFactory.getSchoolStuff("Teacher");

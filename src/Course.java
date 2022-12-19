@@ -1,8 +1,6 @@
 import java.io.File;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Course implements Serializable
 {
@@ -11,14 +9,14 @@ public class Course implements Serializable
     //Map<Integer,String> courseMap = new HashMap<>();
     String courseCode;
     String courseName;
-    ArrayList<Course> requiredPrerequisites;
+    Set<Course> requiredPrerequisites;
 
 
 
     Course(String name, String code){
         this.courseName = name;
         this.courseCode = code;
-        this.requiredPrerequisites = new ArrayList<>();
+        this.requiredPrerequisites = new HashSet<>();
     }
 
     public String getCourseCode()
@@ -41,12 +39,12 @@ public class Course implements Serializable
         this.courseName = courseName;
     }
 
-    public ArrayList<Course> getRequiredPrerequisites()
+    public Set<Course> getRequiredPrerequisites()
     {
         return requiredPrerequisites;
     }
 
-    public void setRequiredPrerequisites(ArrayList<Course> requiredPrerequisites)
+    public void setRequiredPrerequisites(Set<Course> requiredPrerequisites)
     {
         this.requiredPrerequisites = requiredPrerequisites;
     }
