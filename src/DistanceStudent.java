@@ -5,6 +5,7 @@ public class DistanceStudent implements Student, Serializable
 {
 
     String nameOfStudent;
+    String studyRate;
     long idNumber;
     School school;
     Set<Course> currentCourses;
@@ -55,8 +56,8 @@ public class DistanceStudent implements Student, Serializable
         this.setName(name);
         this.setId(id);
         System.out.println("CHOOSE STUDY-RATE: FULL TIME/PART-TIME");
-        String studyRate = scan.nextLine();
-        System.out.println("YOU CHOSE: " + studyRate);
+        this.studyRate = scan.nextLine();
+        System.out.println("YOU CHOSE: " + this.studyRate);
         school.addStudent(this);
     }
 

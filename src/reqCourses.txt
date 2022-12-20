@@ -1,0 +1,3 @@
+Svenska1, SVE1
+Engelska1, ENG1
+Matematik1, MAT1

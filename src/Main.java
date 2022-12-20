@@ -8,11 +8,8 @@ public class Main {
     public static void main(String[] args) throws Exception{
         Path p1 = Paths.get("src/courses.txt");
         Path p2 = Paths.get("src/students.txt");
-        Set<Course> requiredPrerequisites = new HashSet<>();
-        requiredPrerequisites.add(new Course("Svenska 1", "SVE1"));
-        requiredPrerequisites.add(new Course("Engelska 1", "ENG1"));
-        requiredPrerequisites.add(new Course("Matematik 1", "MAT1"));
-        School school = new School("GroupThreeAcademy", "GroupThreeStreet", p1, p2 , requiredPrerequisites);
+        Path p3 = Paths.get("src/reqCourses.txt");
+        School school = new School("GroupThreeAcademy", "GroupThreeStreet", p1, p2 , p3);
         schoolSystem schoolSystem = new schoolSystem(school);
         Student student = schoolSystem.welcomeMenu(p2);
         int option = 0;
