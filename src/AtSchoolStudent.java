@@ -1,6 +1,7 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.Set;
 
 public class AtSchoolStudent implements Student, Serializable
@@ -48,6 +49,14 @@ public class AtSchoolStudent implements Student, Serializable
 
     @Override
     public void studentRegistration() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter your name: ");
+        String name = scan.nextLine();
+        System.out.println("Enter your id: ");
+        long id = scan.nextLong();
+        scan.nextLine();
+        this.setName(name);
+        this.setId(id);
         school.addStudent(this);
     }
 

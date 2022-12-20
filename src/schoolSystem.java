@@ -12,16 +12,9 @@ public class schoolSystem
     {
         Scanner scan = new Scanner(System.in);
         StudentFactory studentFactory = new StudentFactory();
-        System.out.println("Enter your name: ");
-        String name = scan.nextLine();
-        System.out.println("Enter your id: ");
-        long id = scan.nextLong();
-        scan.nextLine();
         System.out.println("Choose category: DISTANCE/SCHOOL");
         String category = scan.nextLine();
         Student student = studentFactory.getStudent(category);
-        student.setName(name);
-        student.setId(id);
         student.setSchoolForStudent(this.school);
         student.studentRegistration();
         return student;

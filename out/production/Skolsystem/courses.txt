@@ -1,0 +1,13 @@
+Svenska1, SVE1
+Engelska1, ENG1
+Matematik1, MAT1
+Spanska1, SPA1
+Franska1, FRA1
+Tyska1, TYS1
+Svenska2, SVE2
+Engelska2, ENG2
+Matematik2, MAT2
+Spanska2, SPA2
+Franska2, FRA2
+Tyska2, TYS2
+DJUREN I NATURBRUKET 1, DJU1

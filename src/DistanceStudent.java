@@ -46,6 +46,17 @@ public class DistanceStudent implements Student, Serializable
 
     @Override
     public void studentRegistration() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter your name: ");
+        String name = scan.nextLine();
+        System.out.println("Enter your id: ");
+        long id = scan.nextLong();
+        scan.nextLine();
+        this.setName(name);
+        this.setId(id);
+        System.out.println("CHOOSE STUDY-RATE: FULL TIME/PART-TIME");
+        String studyRate = scan.nextLine();
+        System.out.println("YOU CHOSE: " + studyRate);
         school.addStudent(this);
     }
 
