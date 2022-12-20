@@ -1,5 +1,3 @@
-import java.io.*;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
@@ -32,7 +30,7 @@ public class Main {
                     case 1 -> System.out.println(school);
                     case 2 -> schoolSystem.showCourseCatalogue();
                     case 3 -> schoolSystem.enterCourseToApply(student, p2);
-                    case 4 -> System.out.println(student.getCurrentCourses());
+                    case 4 -> printCatalogueSet(student.getCurrentCourses());
                     case 5 -> System.out.println("GOODBYE!");
                     default -> System.out.println("Please choose one of the options!");
                 }
@@ -54,5 +52,11 @@ public class Main {
 
          */
 
+    }
+    private static void printCatalogueSet(Set<Course> courses){
+        System.out.println("These are the courses you have applied to :");
+        for (Course c : courses){
+            System.out.println(" - " + c.courseName + " (" + c.courseCode + ")");
+        }
     }
 }
