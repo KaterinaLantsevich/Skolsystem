@@ -27,7 +27,7 @@ public class Main {
             {
                 switch (option)
                 {
-                    case 1 -> System.out.println(school);
+                    case 1 -> schoolSystem.showSchoolInfo();
                     case 2 -> schoolSystem.showCourseCatalogue();
                     case 3 -> schoolSystem.enterCourseToApply(student, p2);
                     case 4 -> printCatalogueSet(student.getCurrentCourses());

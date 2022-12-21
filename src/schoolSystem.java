@@ -113,13 +113,11 @@ public class schoolSystem
                             scan.nextLine();
                             System.out.println("Enter your name: (ENTER EXIT TO GO BACK TO MENU)");
                             name = scan.nextLine();
-                            System.out.println(name);
                             if(name.equalsIgnoreCase("EXIT")){
                                 break;
                             }
                             System.out.println("Enter your id: ");
                             id = scan.nextLong();
-                            System.out.println(id);
                             for(Student s : studentsList){
                                 if(s.getName().equalsIgnoreCase(name) && s.getID() == id){
                                     System.out.println("LOG IN SUCCESSFUL");
@@ -138,7 +136,6 @@ public class schoolSystem
                             studentsList = read(studentsFilePath);
                             studentsList.add(student);
                             write(studentsFilePath, studentsList);
-                            System.out.println(school);
                         }
                         break;
                     case 3:
@@ -189,6 +186,17 @@ public class schoolSystem
                 write(p, studentArrayList);
             }
             index ++;
+        }
+    }
+
+    public void showSchoolInfo()
+    {
+        System.out.println("SCHOOL NAME: " + this.school.schoolName);
+        System.out.println("ADRESS: " + this.school.adress);
+        System.out.println("Required prerequisites: ");
+        Set<Course> courses = this.school.requiredPrerequisites;
+        for(Course c : courses){
+            System.out.println(" - " + c.courseName + "(" + c.courseCode + ")");
         }
     }
 }
