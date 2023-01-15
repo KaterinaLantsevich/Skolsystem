@@ -13,12 +13,13 @@ public class School implements Serializable
     Set<Course> courses;
     ArrayList<Student> students;
     Set<Course> requiredPrerequisites;
-    School(String name, String adress, Path p1, Path p2, Set<Course> preReq){
+    School(String name, String adress, Path p1, Path p2, Path preReq){
         this.schoolName = name;
         this.adress = adress;
-        this.requiredPrerequisites = preReq;
         this.courses = new HashSet<>();
         this.students = new ArrayList<>();
+        this.requiredPrerequisites = new HashSet<>();
+        readRequiredPrerequisites(preReq);
         readCourses(p1);
         readStudents(p2);
     }
@@ -34,6 +35,31 @@ public class School implements Serializable
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        }
+
+    public void readRequiredPrerequisites(Path p){
+        Course course;
+        String courseName;
+        String courseCode;
+        String tempLine = "";
+        String[] courseInfo = new String[2];
+        try (FileReader fr = new FileReader(String.valueOf(p));
+             BufferedReader br = new BufferedReader(fr))
+        {
+            while ((tempLine = br.readLine()) != null)
+            {
+                courseInfo = tempLine.split(",");
+                courseName = courseInfo[0].strip().toUpperCase();
+                courseCode = courseInfo[1].strip().toUpperCase();
+                course = new Course(courseName, courseCode);
+                addPrerequisite(course);
+            }
+
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
     }
     public void readCourses(Path p){
         Course course;
@@ -62,6 +88,9 @@ public class School implements Serializable
 
     public void addCourse(Course course){
         this.courses.add(course);
+    }
+    public void addPrerequisite(Course preRequisite){
+        this.requiredPrerequisites.add(preRequisite);
     }
 
     public void addStudent(Student student){
